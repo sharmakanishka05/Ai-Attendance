@@ -1,0 +1,33 @@
+{
+  "dataset": "MCA_ATTENDANCE_TEST_DATA",
+  "dataset_type": "TEST_DATA",
+  "students": [
+    {
+      "student_id": "MCA001",
+      "name": "Kanishka Sharma",
+      "course": "MCA",
+      "year": "Final Year",
+      "expected_image": "IMAGE_1",
+      "image_filename": "MCA001_Kanishka_Sharma.jpg",
+      "image_path": "data/test_data/images/MCA001_Kanishka_Sharma.jpg"
+    },
+    {
+      "student_id": "MCA002",
+      "name": "Namita Jain",
+      "course": "MCA",
+      "year": "Final Year",
+      "expected_image": "IMAGE_2",
+      "image_filename": "MCA002_Namita_Jain.jpg",
+      "image_path": "data/test_data/images/MCA002_Namita_Jain.jpg"
+    },
+    {
+      "student_id": "MCA003",
+      "name": "Akanksha Mishra",
+      "course": "MCA",
+      "year": "Final Year",
+      "expected_image": "IMAGE_3",
+      "image_filename": "MCA003_Akanksha_Mishra.jpg",
+      "image_path": "data/test_data/images/MCA003_Akanksha_Mishra.jpg"
+    }
+  ]
+}

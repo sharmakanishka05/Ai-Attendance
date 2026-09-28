@@ -1,0 +1,38 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Node
+node_modules/
+**/node_modules/
+
+# Frontend builds
+.next/
+out/
+dist/
+build/
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local database
+*.db
+
+# Test / biometric data
+backend/data/test_data/
+frontend/public/test_data/
+backend/data/faces/
+# Test data
+backend/backend/data/test_data/

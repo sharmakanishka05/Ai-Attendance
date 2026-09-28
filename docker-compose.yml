@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # Primary Production Database with pgvector extension
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: attendai_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: attendai_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d attendai_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # FastAPI Backend Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: attendai_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgrespassword@postgres:5432/attendai_db
+      JWT_SECRET: attendai_super_secret_production_key_2026_x89f
+      FACE_MATCH_THRESHOLD: 0.70
+      FACE_REVIEW_THRESHOLD: 0.52
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend/data:/app/data
+
+  # Next.js Frontend Service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: attendai_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:8000/api
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
